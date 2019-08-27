@@ -14,6 +14,10 @@ const createWindow = () => {
     height: 600,
     minWidth: 830,
     minHeight: 500,
+    webPreferences: {
+      // 需要在 electron 控制台 console 的地方执行 require('devtron').install()
+      nodeIntegration: true
+    },
     backgroundColor: '#f8f8f8'
   })
   win.loadURL(`file://${__dirname}/main.html`)
