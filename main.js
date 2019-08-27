@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow, ipcMain } = require('electron')
 const path = require('path')
 
 // 使用 electron-reload 硬重置加载
@@ -7,6 +7,13 @@ require('electron-reload')(__dirname, {
 })
 
 let win
+
+ipcMain.on('greet', (event, args) => {
+  console.log(args)
+  event.sender.send('greet', {
+    message: 'hi renderer ~'
+  })
+})
 
 const createWindow = () => {
   win = new BrowserWindow({
